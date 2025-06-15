@@ -1,3 +1,10 @@
+# To reset the image
+
+```sh
+docker compose down -v
+docker compose up --build
+```
+
 # Hello Docker: React, Express, and Postgres
 
 A "hello" app used as a placeholder while setting up Docker containers for a web application.
