@@ -38,9 +38,9 @@ When building the containers, tag them with the current Git commit SHA.
 
 ```sh
 # In the project root directory:
-COMMIT_SHA=$(git rev-parse HEAD)
-docker build -t hello-api:$COMMIT_SHA -t hello-api:latest api
-docker build -t hello-web:$COMMIT_SHA -t hello-web:latest web
+$COMMIT_SHA = git rev-parse HEAD
+docker build -t "hello-api:$COMMIT_SHA" -t hello-api:latest ./api
+docker build -t "hello-web:$COMMIT_SHA" -t hello-web:latest ./web
 ```
 
 List the images:
@@ -54,24 +54,27 @@ Running the images:
 ```sh
 docker network create --driver bridge hello-net
 
-docker run --rm -d \
-  --name=db \
-  --network hello-net \
-  -e POSTGRES_PASSWORD=postgres \
+docker run --rm -d `
+  --name db `
+  --network hello-net `
+  -e POSTGRES_PASSWORD=postgres `
   postgres
 
-docker run --rm -d --init \
-  --name=api \
-  --network hello-net \
-  -p 4002:4000  \
-  -e DB_HOST=db -e  DB_USER=postgres -e DB_PASSWORD=postgres \
+docker run --rm -d --init `
+  --name api `
+  --network hello-net `
+  -p 4002:4000 `
+  -e DB_HOST=db `
+  -e DB_USER=postgres `
+  -e DB_PASSWORD=postgres `
   hello-api
 
-docker run --rm -d \
-  --name=web \
-  -p 80:80 \
-  -e API_BASEURL=http://localhost:4002 \
+docker run --rm -d `
+  --name web `
+  -p 80:80 `
+  -e API_BASEURL=http://localhost:4002 `
   hello-web
+
 ```
 
 Load the production build at http://localhost.
