@@ -6,8 +6,8 @@ CREATE TABLE IF NOT EXISTS hello (
   id SERIAL PRIMARY KEY, 
   message TEXT
 );
-
  
+INSERT INTO hello (message) VALUES ( 'Hello from Postgres db!');
 
 -- Users table
 CREATE TABLE IF NOT EXISTS users (
